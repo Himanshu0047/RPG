@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using RPG.Saving;
 
 namespace RPG.Movements
 {
-    public class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour, ISaveable
     {
         NavMeshAgent agent;
         Animator animator;
@@ -41,6 +42,21 @@ namespace RPG.Movements
             Vector3 localVelocity = transform.InverseTransformDirection(velocity);
 
             animator.SetFloat("ForwardSpeed", localVelocity.z);
+        }
+
+        public object CaptureState()
+        {
+            return new SerializableVector3(transform.position);
+        }
+
+        public void RestoreState(object state)
+        {
+            SerializableVector3 position = (SerializableVector3)state;
+
+            // Disabling the navmesh agent so that it does not mess with the position change
+            agent.enabled = false;
+            transform.position = position.ToVector();
+            agent.enabled = true;
         }
     }
 }
