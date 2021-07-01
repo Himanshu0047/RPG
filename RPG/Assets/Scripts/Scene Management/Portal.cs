@@ -37,12 +37,15 @@ namespace RPG.SceneManagement
 
             // Save and Load
             SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
+            // Save old scene
             wrapper.Save();
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
             wrapper.Load();
 
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
+            // Save new scene
+            wrapper.Save();
             yield return fader.FadeIn(fadeInTime);
 
             Destroy(gameObject);

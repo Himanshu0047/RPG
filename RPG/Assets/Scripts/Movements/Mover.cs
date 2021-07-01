@@ -46,13 +46,18 @@ namespace RPG.Movements
 
         public object CaptureState()
         {
-            return new SerializableVector3(transform.position);
+            // Can also use Struct
+            Dictionary<string, object> data = new Dictionary<string, object>();
+            data["position"] = new SerializableVector3(transform.position);
+            data["rotation"] = new SerializableVector3(transform.eulerAngles);
+            return data;
         }
 
         public void RestoreState(object state)
         {
-            SerializableVector3 position = (SerializableVector3)state;
-            GetComponent<NavMeshAgent>().Warp(position.ToVector());
+            Dictionary<string, object> data = (Dictionary<string, object>)state;
+            GetComponent<NavMeshAgent>().Warp(((SerializableVector3)data["position"]).ToVector());
+            transform.eulerAngles = ((SerializableVector3)data["rotation"]).ToVector();
         }
     }
 }
