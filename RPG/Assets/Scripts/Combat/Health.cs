@@ -10,16 +10,8 @@ namespace RPG.Combat
         [SerializeField] float healthPoints = 20f;
 
         bool isDead;
-        Animator animator;
-        Fighter fighter;
 
         public bool IsDead() => isDead;
-
-        private void Start()
-        {
-            animator = GetComponent<Animator>();
-            fighter = GetComponent<Fighter>();
-        }
 
         public void TakeDamage(float damage)
         {
@@ -37,7 +29,7 @@ namespace RPG.Combat
 
         void DeathBehaviour()
         {
-            animator.SetTrigger("Die");
+            GetComponent<Animator>().SetTrigger("Die");
         }
 
         public object CaptureState()
