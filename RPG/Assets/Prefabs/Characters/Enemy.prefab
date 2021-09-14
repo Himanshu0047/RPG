@@ -26,9 +26,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed61dcf9105c724792e5bb40a8229f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponRange: 2
   timeBetweenAttacks: 2
-  weaponDamage: 5
+  rightHand: {fileID: 1076023242233866455}
+  leftHand: {fileID: 1076023242233792725}
+  defaultWeapon: {fileID: 11400000, guid: b45d7c50eec35c14ebc8a101d3ddc570, type: 2}
 --- !u!114 &2303911471864853030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +139,16 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: bfbe2e8b331e2cc42be1591f949c0e41, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+--- !u!4 &1076023242233792725 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 481036, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+  m_PrefabInstance: {fileID: 1076023242234240985}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1076023242233866455 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 423694, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+  m_PrefabInstance: {fileID: 1076023242234240985}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3790868251168380854
 PrefabInstance:
   m_ObjectHideFlags: 0
