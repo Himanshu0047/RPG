@@ -97,7 +97,20 @@ namespace RPG.Combat
         void Hit()
         {
             if(target == null) { return; }
-            target.TakeDamage(currentWeapon.GetWeaponDamage);
+
+            if(currentWeapon.HasProjectile) 
+            {
+                currentWeapon.LaunchProjectile(rightHand, leftHand, target); 
+            }
+            else
+            {
+                target.TakeDamage(currentWeapon.GetWeaponDamage);
+            }
+        }
+
+        void Shoot()
+        {
+            Hit();
         }
 
         public void EquipWeapon(Weapon weapon)
