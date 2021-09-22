@@ -10,7 +10,9 @@ namespace RPG.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float weaponDamage = 5f;
         [SerializeField] bool isRightHanded = true;
+        [SerializeField] Projectile projectile = null;
 
+        public bool HasProjectile => projectile != null;
         public float GetWeaponRange => weaponRange;
         public float GetWeaponDamage => weaponDamage;
 
@@ -18,15 +20,28 @@ namespace RPG.Combat
         {
             if(weaponPrefab != null)
             {
-                Transform handTransform = null;
-                if(isRightHanded) { handTransform = rightHand; }
-                else { handTransform = leftHand; }
+                Transform handTransform = ChooseHand(rightHand, leftHand);
                 Instantiate(weaponPrefab, handTransform);
             }
-            if(animatorOverride != null)
+            if (animatorOverride != null)
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
+        }
+
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+        {
+            Projectile projectileInstance = Instantiate(projectile, ChooseHand(rightHand, leftHand).position, projectile.transform.rotation);
+            projectileInstance.SetTarget(target, weaponDamage);
+        }
+
+        private Transform ChooseHand(Transform rightHand, Transform leftHand)
+        {
+            Transform handTransform = null;
+            if (isRightHanded) { handTransform = rightHand; }
+            else { handTransform = leftHand; }
+
+            return handTransform;
         }
     }
 }
